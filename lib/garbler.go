@@ -2,6 +2,7 @@
 package lib
 
 import (
+	"errors"
 	"fmt"
 	"math/rand"
 	"time"
@@ -27,7 +28,7 @@ func init() {
 }
 
 //Generate a password given requirements
-func (g Garbler) Password(req PasswordStrengthRequirements) (string, error) {
+func (g Garbler) password(req PasswordStrengthRequirements) (string, error) {
 	//Step 1: Figure out settings
 	letters := 0
 	mustGarble := 0
@@ -50,6 +51,17 @@ func (g Garbler) Password(req PasswordStrengthRequirements) (string, error) {
 	password = g.addNums(password, req.Digits-mustGarble)
 	password = g.punctuate(password, req.Punctuation)
 	return password, nil
+}
+
+func NewPassword(reqs *PasswordStrengthRequirements) (string, error) {
+	if reqs == nil {
+		reqs = &Medium
+	}
+	if ok, problems := reqs.sanityCheck(); !ok {
+		return "", errors.New("requirements failed validation: " + problems)
+	}
+	e := Garbler{}
+	return e.password(*reqs)
 }
 
 //append digits to string

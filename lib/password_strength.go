@@ -5,12 +5,11 @@ import "unicode"
 //PasswordStrengthRequirements describes the minimal requirements that the generated
 //password must meet.
 type PasswordStrengthRequirements struct {
-	MinimumTotalLength int    //Minimum number characters in password
-	MaximumTotalLength int    //Maximum number of characters (ignored if 0)
-	Uppercase          int    //Minimum number of uppercase letters
-	Digits             int    //Mininum number of digits
-	Punctuation        int    //Minimum number of special characters
-	Generator          string //Option of which generator to use (reserved for future use)
+	MinimumTotalLength int //Minimum number characters in password
+	MaximumTotalLength int //Maximum number of characters (ignored if 0)
+	Uppercase          int //Minimum number of uppercase letters
+	Digits             int //Mininum number of digits
+	Punctuation        int //Minimum number of special characters
 }
 
 //Validate a password against the given requirements
