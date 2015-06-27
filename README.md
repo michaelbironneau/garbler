@@ -42,7 +42,10 @@ func main() {
 	p, _ = garbler.NewPassword(&reqs)
 	fmt.Println(p)
 
-	//specify requirements explicitly
+	//specify requirements explicitly:
+	//if specifying requirements you should not ignore error return,
+	//in case the requirements are impossible to satisfy (eg. minimum length is
+    //greater than maximum length)
 	reqs = garbler.PasswordStrengthRequirements{MinimumTotalLength: 20, Digits:10}
 	p, e := garbler.NewPassword(&reqs)
 	if e != nil {
