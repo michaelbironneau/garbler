@@ -1,5 +1,7 @@
 # Garbler
-Generator of memorable passwords generator written in Go. Available both as a command-line tool and as a Go library.
+Generator of memorable passwords, written in Go. Available both as a command-line tool and as a Go library.
+
+Please see [here](http://golang.org) for Godocs or read on for examples.
 
 **What makes the passwords memorable?**
 
