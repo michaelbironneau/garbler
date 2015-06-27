@@ -1,4 +1,8 @@
 # Garbler
+
+*Author*: Michael Bironneau
+*License*: MIT
+
 Generator of memorable passwords, written in Go. Available both as a command-line tool and as a Go library.
 
 Please see [here](http://godoc.org/github.com/michaelbironneau/garbler/lib) for Godocs or read on for examples.
