@@ -18,7 +18,7 @@ A few example passwords:
 * .!Bonhomiqvi984-:!
 * ZizqoRuK293?
 
-Garbler has no external dependencies and is fast enough for bulk use: even using the `Paranoid` preset, Garbler is capable of generating near 100k passwords per second (Intel core i7 Pro).
+Garbler has no external dependencies and is fast enough for bulk use: it can generate near 100k passwords per second depending on the preset used (Intel core i7 Pro).
 
 ```
 BenchmarkParanoid	  100000	     22721 ns/op
