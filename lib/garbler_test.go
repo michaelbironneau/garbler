@@ -142,8 +142,18 @@ func TestLotsOfUppercase(t *testing.T) {
 	}
 }
 
-func BenchmarkGarbler(b *testing.B) {
+func BenchmarkParanoid(b *testing.B) {
 	reqs := Paranoid //worst-case from presets
+	for n := 0; n < b.N; n++ {
+		_, e := NewPassword(&reqs)
+		if e != nil {
+			b.Error(e)
+		}
+	}
+}
+
+func BenchmarkMedium(b *testing.B) {
+	reqs := Medium //worst-case from presets
 	for n := 0; n < b.N; n++ {
 		_, e := NewPassword(&reqs)
 		if e != nil {
