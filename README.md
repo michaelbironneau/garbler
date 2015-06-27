@@ -5,7 +5,7 @@ Please see [here](http://godoc.org/github.com/michaelbironneau/garbler/lib) for 
 
 **What makes the passwords memorable?**
 
-The password generation method is inspired by the environ passwords, which are designed to be pronouncable, and therefore easier to memorize. However, these passwords are known not to be very secure, therefore the concept has been generalized to meet any password strength requirement that can be expressed in minimum/maximum length, minimum number of digits, minimum number of punctuation characters, and/or minimum number of uppercase letters.
+The password generation method is inspired by the environ passwords, which are designed to be pronouncable, and therefore easier to memorize. For extra security, the method originally used to generate environ passwords has been generalized to meet any password strength requirement that can be expressed in minimum/maximum length, minimum number of digits, minimum number of punctuation characters, and/or minimum number of uppercase letters.
 
 A few example passwords:
 
@@ -77,5 +77,7 @@ You can use the following flags to modify the behavior:
 * `uppercase`: minimum number of uppercase characters (eg. `garbler -uppercase=3`)
 
 ## Golang API
+
+To use Garbler within your Go application, install it as described above, then import `github.com/michaelbironneau/garbler/lib`, as in the example.
 
 See the godocs [here](http://godoc.org/github.com/michaelbironneau/garbler/lib).
