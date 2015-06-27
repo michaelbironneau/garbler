@@ -1,7 +1,7 @@
 # Garbler
 Generator of memorable passwords, written in Go. Available both as a command-line tool and as a Go library.
 
-Please see [here](http://golang.org) for Godocs or read on for examples.
+Please see [here](http://godoc.org/github.com/michaelbironneau/garbler/lib) for Godocs or read on for examples.
 
 **What makes the passwords memorable?**
 
@@ -78,4 +78,4 @@ You can use the following flags to modify the behavior:
 
 ## Golang API
 
-See the godocs [here](http://golang.org).
+See the godocs [here](http://godoc.org/github.com/michaelbironneau/garbler/lib).
