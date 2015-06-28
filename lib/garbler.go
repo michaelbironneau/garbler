@@ -24,8 +24,10 @@ SOFTWARE.*/
 package lib
 
 import (
+	crypto "crypto/rand"
 	"errors"
 	"fmt"
+	"math/big"
 	"math/rand"
 	"time"
 	"unicode"
@@ -92,7 +94,7 @@ func (g Garbler) addNums(p string, numDigits int) string {
 		return p
 	}
 	ret := p
-	ret += fmt.Sprintf("%d", pow(10, numDigits-1)+rand.Intn(pow(10, numDigits)-pow(10, numDigits-1)))
+	ret += fmt.Sprintf("%d", pow(10, numDigits-1)+randInt(pow(10, numDigits)-pow(10, numDigits-1)))
 	return ret
 }
 
@@ -104,9 +106,9 @@ func (g Garbler) punctuate(p string, numPunc int) string {
 	ret := p
 	for i := 0; i < numPunc; i++ {
 		if i%2 == 0 {
-			ret += string(Punctuation[rand.Intn(len(Punctuation))])
+			ret += string(Punctuation[randInt(len(Punctuation))])
 		} else {
-			ret = string(Punctuation[rand.Intn(len(Punctuation))]) + ret
+			ret = string(Punctuation[randInt(len(Punctuation))]) + ret
 		}
 	}
 	return ret
@@ -130,9 +132,9 @@ func (g Garbler) garbledSequence(length int, numGarbled int) string {
 			//make things garblable if required:
 			//make every other character garblable until we reach numGarblable
 			if sequence[sequencePosition] == "c" {
-				ret += string(ConsonantGarblers[rand.Intn(len(ConsonantGarblers))])
+				ret += string(ConsonantGarblers[randInt(len(ConsonantGarblers))])
 			} else {
-				ret += string(VowelGarblers[rand.Intn(len(VowelGarblers))])
+				ret += string(VowelGarblers[randInt(len(VowelGarblers))])
 			}
 			numCanGarble++
 			sequencePosition = (sequencePosition + 1) % len(sequence)
@@ -140,9 +142,9 @@ func (g Garbler) garbledSequence(length int, numGarbled int) string {
 		}
 		//no need to garble this character, just generate a random vowel/consonant
 		if sequence[sequencePosition] == "c" {
-			ret += string(Consonants[rand.Intn(len(Consonants))])
+			ret += string(Consonants[randInt(len(Consonants))])
 		} else {
-			ret += string(Vowels[rand.Intn(len(Vowels))])
+			ret += string(Vowels[randInt(len(Vowels))])
 		}
 		sequencePosition = (sequencePosition + 1) % len(sequence)
 	}
@@ -155,9 +157,9 @@ func (g Garbler) garbledSequence(length int, numGarbled int) string {
 			//make things garblable if required:
 			//make every other character garblable until we reach numGarblable
 			if sequence[sequencePosition] == "c" {
-				ret += string(ConsonantGarblers[rand.Intn(len(ConsonantGarblers))])
+				ret += string(ConsonantGarblers[randInt(len(ConsonantGarblers))])
 			} else {
-				ret += string(VowelGarblers[rand.Intn(len(VowelGarblers))])
+				ret += string(VowelGarblers[randInt(len(VowelGarblers))])
 			}
 			numCanGarble++
 			sequencePosition = (sequencePosition + 1) % len(sequence)
@@ -213,4 +215,14 @@ func pow(a, b int) int {
 		a *= a
 	}
 	return p
+}
+
+//best-effort attempt to get an int from crypto/rand. if
+//an error is returned, it will fall back to math/rand.
+func randInt(max int) int {
+	i, err := crypto.Int(crypto.Reader, big.NewInt(int64(max)))
+	if err == nil {
+		return int(i.Int64())
+	}
+	return rand.Intn(max)
 }
