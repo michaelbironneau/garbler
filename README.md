@@ -26,7 +26,7 @@ BenchmarkMedium	      100000	     15620 ns/op
 ```
 
 The API is simple, clean, and comes with presets and sensible defaults:
-```
+```go
 import (
 	garbler "github/michaelbironneau/garbler/lib"
 	"fmt"
