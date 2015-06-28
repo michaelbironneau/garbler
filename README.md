@@ -18,11 +18,11 @@ A few example passwords:
 * .!Bonhomiqvi984-:!
 * ZizqoRuK293?
 
-Garbler has no external dependencies and is fast enough for bulk use: it can generate near 100k passwords per second depending on the preset used (Intel core i7 Pro).
+Garbler has no external dependencies and is fast enough for bulk use: it can generate 10-20k passwords per second depending on the preset used (Intel core i7 Pro).
 
 ```
-BenchmarkParanoid	  100000	     22721 ns/op
-BenchmarkMedium	      100000	     15620 ns/op
+BenchmarkParanoid	   10000	    193711 ns/op
+BenchmarkMedium	       20000	     88755 ns/op
 ```
 
 The API is simple, clean, and comes with presets and sensible defaults:
