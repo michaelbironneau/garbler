@@ -25,6 +25,13 @@ BenchmarkParanoid	   10000	    193711 ns/op
 BenchmarkMedium	       20000	     88755 ns/op
 ```
 
+## Installation
+
+Run `go get github.com/michaelbironneau/garbler`. If you want to use it as a command line tool, you will also need to run `go install` to get the binaries. I can provide links to pre-built binaries if there is enough interest - please open an issue if you would like this to happen.
+
+
+## Code examples
+
 The API is simple, clean, and comes with presets and sensible defaults:
 ```go
 import (
@@ -61,12 +68,14 @@ func main() {
 ```
 
 **Generating multiple passwords**
+
 You can use `NewPasswords` instead of `NewPassword` to get a string slice of passwords:
 ```go
 passwords, _ := garbler.NewPasswords(&garbler.Strong, 10) //generates 10 passwords with Strong preset
 ```
 
 **Using Garbler to check password strength**
+
 You can also use Garbler to check a given password against strength requirements. For example,
 
 ```go
@@ -75,10 +84,6 @@ if ok, message := reqs.Validate(password); !ok {
 	fmt.Println("your password failed validation because" + message)
 }
 ```
-
-## Installation
-
-Run `go get github.com/michaelbironneau/garbler`. If you want to use it as a command line tool, you will also need to run `go install` to get the binaries. I can provide links to pre-built binaries if there is enough interest - please open an issue if you would like this to happen.
 
 ## Command-line usage
 
