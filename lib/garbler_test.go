@@ -59,6 +59,17 @@ func TestEasy(t *testing.T) {
 	}
 }
 
+func TestLength(t *testing.T) {
+	reqs := Easy
+	p, e := NewPasswords(&reqs, 10)
+	if e != nil {
+		t.Error(e)
+	}
+	if len(p) != 10 {
+		t.Error("expected 10 passwords, got", len(p))
+	}
+}
+
 func TestDifferent(t *testing.T) {
 	reqs := Easy
 	p, e := NewPassword(&reqs)

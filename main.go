@@ -30,14 +30,16 @@ import (
 )
 
 //simple CLI interface. Sample usage:
-//goner -min=8 -max=10 -digits=3 -punctuation=3 -uppercase=4
+//goner -n=8 -min=8 -max=10 -digits=3 -punctuation=3 -uppercase=4
 //Flags:
-//  -l: minimum length
-//  -L: maximum length
-//  -d: digits
-//  -p: punctuation
-//  -u: uppercase
+//  -n: number of passwords to generate
+//  -min: minimum length
+//  -max: maximum length
+//  -digits: digits (0-9) characters
+//  -punctuation: punctuation characters
+//  -uppercase: uppercase characters
 func main() {
+	n := flag.Int("n", 8, "number of passwords to generate")
 	min := flag.Int("min", 12, "minimum password length")
 	max := flag.Int("max", 0, "maximum password length")
 	digits := flag.Int("digits", 3, "number of digits")
@@ -51,10 +53,12 @@ func main() {
 		Digits:             *digits,
 		Punctuation:        *punctuation,
 	}
-	pass, err := garbler.NewPassword(&reqs)
-	if err != nil {
-		fmt.Println(err)
-		return
+	for i := 0; i < *n; i++ {
+		pass, err := garbler.NewPassword(&reqs)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		fmt.Println(pass)
 	}
-	fmt.Println(pass)
 }

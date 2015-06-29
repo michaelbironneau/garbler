@@ -77,6 +77,7 @@ func (g Garbler) password(req PasswordStrengthRequirements) (string, error) {
 	return password, nil
 }
 
+//Generate one password that meets the given requirements
 func NewPassword(reqs *PasswordStrengthRequirements) (string, error) {
 	if reqs == nil {
 		reqs = &Medium
@@ -86,6 +87,26 @@ func NewPassword(reqs *PasswordStrengthRequirements) (string, error) {
 	}
 	e := Garbler{}
 	return e.password(*reqs)
+}
+
+//Generate n passwords that meet the given requirements
+func NewPasswords(reqs *PasswordStrengthRequirements, n int) ([]string, error) {
+	var err error
+	if reqs == nil {
+		reqs = &Medium
+	}
+	if ok, problems := reqs.sanityCheck(); !ok {
+		return nil, errors.New("requirements failed validation: " + problems)
+	}
+	e := Garbler{}
+	passes := make([]string, n, n)
+	for i := 0; i < n; i++ {
+		passes[i], err = e.password(*reqs)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return passes, nil
 }
 
 //append digits to string

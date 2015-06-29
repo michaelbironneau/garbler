@@ -60,6 +60,22 @@ func main() {
 }
 ```
 
+**Generating multiple passwords**
+You can use `NewPasswords` instead of `NewPassword` to get a string slice of passwords:
+```go
+passwords, _ := garbler.NewPasswords(&garbler.Strong, 10) //generates 10 passwords with Strong preset
+```
+
+**Using Garbler to check password strength**
+You can also use Garbler to check a given password against strength requirements. For example,
+
+```go
+reqs := PasswordStrengthRequirements{MinimumTotalLength: 8, Punctuation: 1, Uppercase: 1, Digits: 1}
+if ok, message := reqs.Validate(password); !ok {
+	fmt.Println("your password failed validation because" + message)
+}
+```
+
 ## Installation
 
 Run `go get github.com/michaelbironneau/garbler`. If you want to use it as a command line tool, you will also need to run `go install` to get the binaries. I can provide links to pre-built binaries if there is enough interest - please open an issue if you would like this to happen.
@@ -68,15 +84,16 @@ Run `go get github.com/michaelbironneau/garbler`. If you want to use it as a com
 
 *This assumes that `$GOPATH/bin` has been added to your `$PATH` environment variable. If that is not the case, you should either do that or first change your current working directory to `$GOPATH/bin` before attempting the following.*
 
-The `garbler` command, without any arguments, will spit out a password that is:
+The `garbler` command, without any arguments, will spit out 10 passwords that:
 
-* 12 characters long
-* has 3 digits
-* 1 punctuation character
-* 1 uppercase character
+* are 12 characters long
+* have 3 digits
+* have 1 punctuation character
+* have 1 uppercase character
 
 You can use the following flags to modify the behavior:
 
+* `n` : number of passwords to generate (eg. `garbler -n=20`)
 * `min`: minimum length of generated password (eg. `garbler -min=10`)
 * `max`: maximum length of generated password (eg. `garbler -max=10`)
 * `digits`: minimum number of digits in password (eg. `garbler -min=15 -max=20 -digits=5`)
