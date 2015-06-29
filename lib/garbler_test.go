@@ -48,6 +48,17 @@ func Test4(t *testing.T) {
 	}
 }
 
+func TestManyDigits(t *testing.T) {
+	reqs := PasswordStrengthRequirements{MinimumTotalLength: 8, Digits: 30}
+	p, e := NewPassword(&reqs)
+	if e != nil {
+		t.Error(e)
+	}
+	if ok, msg := reqs.Validate(p); !ok {
+		t.Error(msg)
+	}
+}
+
 func TestEasy(t *testing.T) {
 	reqs := Easy
 	p, e := NewPassword(&reqs)

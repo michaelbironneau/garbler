@@ -115,7 +115,13 @@ func (g Garbler) addNums(p string, numDigits int) string {
 		return p
 	}
 	ret := p
-	ret += fmt.Sprintf("%d", pow(10, numDigits-1)+randInt(pow(10, numDigits)-pow(10, numDigits-1)))
+	remaining := numDigits
+	for remaining > 10 {
+		ret += fmt.Sprintf("%d", pow(10, 9)+randInt(pow(10, 10)-pow(10, 9)))
+		remaining -= 10
+	}
+	ret += fmt.Sprintf("%d", pow(10, remaining-1)+randInt(pow(10, remaining)-pow(10, remaining-1)))
+
 	return ret
 }
 
