@@ -35,7 +35,7 @@ Run `go get github.com/michaelbironneau/garbler`. If you want to use it as a com
 The API is simple, clean, and comes with presets and sensible defaults:
 ```go
 import (
-	garbler "github/michaelbironneau/garbler/lib"
+	garbler "github.com/michaelbironneau/garbler/lib"
 	"fmt"
 )
 
